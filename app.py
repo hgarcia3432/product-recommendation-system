@@ -12,7 +12,7 @@ def serve_data(filename):
 
 @app.route('/')
 def home():
-    """Página principal"""
+    """Página principal del proyecto"""
     return render_template('index.html')
 
 @app.route('/recommend/<int:product_id>')
