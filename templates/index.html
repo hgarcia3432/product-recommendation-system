@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Recomendación - Tienda Online</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .card {
+        transition: transform 0.2s;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .badge {
+        font-size: 0.8em;
+    }
+    .btn {
+        margin-top: 10px;
+    }
+</style>
 </head>
 <body>
     <div class="container mt-4">
@@ -31,6 +48,8 @@
                 displayProducts(products);
             } catch (error) {
                 console.error('Error cargando productos:', error);
+                // Fallback: mostrar productos hardcodeados si falla la carga
+                displayProducts(getFallbackProducts());
             }
         }
 
@@ -49,6 +68,21 @@
                 }
             }
             return products;
+        }
+
+        function getFallbackProducts() {
+            return [
+                {id: 1, name: 'iPhone13', category: 'Electronics', price: 999},
+                {id: 2, name: 'MacBookPro', category: 'Electronics', price: 1999},
+                {id: 3, name: 'AirPodsPro', category: 'Electronics', price: 249},
+                {id: 4, name: 'SamsungGalaxy', category: 'Electronics', price: 899},
+                {id: 5, name: 'iPadAir', category: 'Electronics', price: 599},
+                {id: 6, name: 'CoffeeMaker', category: 'Home', price: 89},
+                {id: 7, name: 'VacuumRobot', category: 'Home', price: 299},
+                {id: 8, name: 'NonStickPan', category: 'Home', price: 45},
+                {id: 9, name: 'TowelSet', category: 'Home', price: 35},
+                {id: 10, name: 'RunningShoes', category: 'Sports', price: 120}
+            ];
         }
 
         function displayProducts(products) {
@@ -87,7 +121,7 @@
                     alert('Error al obtener recomendaciones');
                 }
             } catch (error) {
-                alert('Error de conexión');
+                alert('Error de conexión: ' + error.message);
             }
         }
 

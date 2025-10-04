@@ -8,6 +8,8 @@ class ProductRecommender:
     def __init__(self):
         self.products_df = None
         self.purchases_df = None
+        self.user_product_matrix = None
+        self.similarity_matrix = None
         
     def load_data(self, products_file, purchases_file):
         try:
@@ -23,14 +25,29 @@ class ProductRecommender:
             print(f"📊 Productos cargados: {len(self.products_df)}")
             print(f"🛒 Compras cargadas: {len(self.purchases_df)}")
             
-            # Verificar columnas
-            print(f"📋 Columnas en productos: {list(self.products_df.columns)}")
-            print(f"📋 Columnas en compras: {list(self.purchases_df.columns)}")
-            
             return True
         except Exception as e:
             print(f"❌ Error cargando datos: {e}")
             return False
+    
+    def get_product_info(self, product_id):
+        """Obtener información de un producto específico"""
+        try:
+            product_row = self.products_df[self.products_df['product_id'] == product_id]
+            if len(product_row) == 0:
+                return None
+            
+            # Convertir a tipos nativos de Python para JSON
+            product_info = product_row.iloc[0]
+            return {
+                'product_id': int(product_info['product_id']),
+                'product_name': str(product_info['product_name']),
+                'category': str(product_info['category']),
+                'price': float(product_info['price'])
+            }
+        except Exception as e:
+            print(f"❌ Error obteniendo info del producto {product_id}: {e}")
+            return None
     
     def create_recommendation_matrix(self):
         try:
@@ -61,16 +78,6 @@ class ProductRecommender:
             print(f"❌ Error creando matriz: {e}")
             return None
     
-    def get_product_info(self, product_id):
-    """Obtener información de un producto específico"""
-    try:
-        product_row = self.products_df[self.products_df['product_id'] == product_id]
-        if len(product_row) == 0:
-            return None
-        return product_row.iloc[0]
-    except:
-        return None
-    
     def get_recommendations(self, product_id, n_recommendations=3):
         try:
             similarity_df = self.create_recommendation_matrix()
@@ -89,11 +96,11 @@ class ProductRecommender:
                 product_info = self.get_product_info(rec_id)
                 if product_info is not None:
                     recommended_products.append({
-                        'product_id': rec_id,
+                        'product_id': int(rec_id),
                         'product_name': product_info['product_name'],
                         'category': product_info['category'],
-                        'price': product_info['price'],
-                        'similarity_score': round(similarity, 3)
+                        'price': float(product_info['price']),
+                        'similarity_score': round(float(similarity), 3)
                     })
             
             return recommended_products
