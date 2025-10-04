@@ -62,14 +62,14 @@ class ProductRecommender:
             return None
     
     def get_product_info(self, product_id):
-        """Obtener información de un producto específico"""
-        try:
-            product_row = self.products_df[self.products_df['product_id'] == product_id]
-            if len(product_row) == 0:
-                return None
-            return product_row.iloc[0]
-        except:
+    """Obtener información de un producto específico"""
+    try:
+        product_row = self.products_df[self.products_df['product_id'] == product_id]
+        if len(product_row) == 0:
             return None
+        return product_row.iloc[0]
+    except:
+        return None
     
     def get_recommendations(self, product_id, n_recommendations=3):
         try:
