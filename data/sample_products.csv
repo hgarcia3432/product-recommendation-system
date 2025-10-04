@@ -1,11 +1,11 @@
 product_id,product_name,category,price 
-1,iPhone 13,Electr¢nicos,999 
-2,MacBook Pro,Electr¢nicos,1999 
-3,AirPods Pro,Electr¢nicos,249 
-4,Samsung Galaxy,Electr¢nicos,899 
-5,iPad Air,Electr¢nicos,599 
-6,Cafetera Philips,Hogar,89 
-7,Robot Aspirador,Hogar,299 
-8,Sart‚n Antiadherente,Hogar,45 
-9,Juego de Toallas,Hogar,35 
-10,Zapatillas Running,Deportes,120 
+1,iPhone13,Electronics,999 
+2,MacBookPro,Electronics,1999 
+3,AirPodsPro,Electronics,249 
+4,SamsungGalaxy,Electronics,899 
+5,iPadAir,Electronics,599 
+6,CoffeeMaker,Home,89 
+7,VacuumRobot,Home,299 
+8,NonStickPan,Home,45 
+9,TowelSet,Home,35 
+10,RunningShoes,Sports,120 
